@@ -52,9 +52,6 @@ namespace AndcultureCode.CSharp.Testing.Tests
         {
             // Clear all factories
             FactoryExtensions.ClearFactoryDefinitions();
-
-            // Load factories
-            LoadFactories(typeof(BaseTest).GetTypeInfo().Assembly);
         }
 
         /// <summary>
@@ -131,7 +128,7 @@ namespace AndcultureCode.CSharp.Testing.Tests
 
         protected string GetString(byte[] value) => Encoding.UTF8.GetString(value);
 
-        protected static void LoadFactories(Assembly assembly)
+        protected virtual void LoadFactories(Assembly assembly)
         {
             Console.WriteLine($"Loading factories for assembly '{assembly.FullName}'...");
             var factoryTypes = assembly.GetTypes().Where(t => !t.GetTypeInfo().IsAbstract && t.GetTypeInfo().IsSubclassOf(typeof(Factory)));
